@@ -1,0 +1,87 @@
+.teacherListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 24px;
+}
+
+.teacherImageContainer {
+  position: relative;
+
+  border: 3px solid var(--light-yellow);
+  border-radius: 100px;
+  width: 120px;
+  height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teacherImage {
+  border-radius: 100px;
+  width: 96px;
+  height: 96px;
+}
+
+.isOnlineImage {
+  position: absolute;
+  top: 15px;
+  right: 19px;
+}
+
+.firstInformation {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.languagesInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-right: 64px;
+}
+
+.languagesInfo li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  font-size: 14px;
+}
+
+.languagesInfo li:not(:first-child)::before {
+  content: "";
+  display: inline-block;
+  height: 14px;
+  width: 1px;
+  background-color: #d1d1d1;
+  margin: 0 8px;
+}
+
+.levelLangContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.levelLangContainer > *:not(:first-child) {
+  border: 1px solid rgba(18, 20, 23, 0.2);
+}
+
+.levelLangContainer > *:nth-child(1) {
+  background: var(--yellow);
+}
+
+.levelLangBtn {
+  border-radius: 35px;
+  padding: 8px 12px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.15;
+}

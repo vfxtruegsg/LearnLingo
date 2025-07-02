@@ -1,11 +1,11 @@
-import { lazy, Suspense } from "react";
 import Layout from "./components/Layout/Layout.jsx";
+import Loader from "./components/Loader/Loader.jsx";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
 const Teachers = lazy(() => import("./pages/Teachers/Teachers.jsx"));
 const Favorites = lazy(() => import("./pages/Favorites/Favorites.jsx"));
-const Loader = lazy(() => import("./components/Loader/Loader.jsx"));
 
 function App() {
   return (

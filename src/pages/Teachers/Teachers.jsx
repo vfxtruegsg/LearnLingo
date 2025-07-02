@@ -2,6 +2,8 @@ import axios from "axios";
 import css from "./Teachers.module.css";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader.jsx";
+import toast from "react-hot-toast";
+import TeacherCard from "../../components/TeacherCard/TeacherCard.jsx";
 
 const Teachers = () => {
   const [teachersData, setTeachersData] = useState(null);
@@ -19,6 +21,7 @@ const Teachers = () => {
         setTeachersData(response.data);
       } catch (err) {
         console.error(err.message);
+        toast.error("Something went wrong! Please try again later.");
       } finally {
         setIsLoading(false);
       }
@@ -27,11 +30,19 @@ const Teachers = () => {
     fetchTeachers();
   }, []);
 
+  console.log(teachersData);
+
   return isLoading ? (
     <Loader />
   ) : (
     <section>
-      <div className="container"></div>
+      <div className="container">
+        <ul>
+          {teachersData.map((item, index) => (
+            <TeacherCard key={index} data={item} />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };
