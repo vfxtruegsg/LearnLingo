@@ -5,11 +5,12 @@ import { Route, Routes } from "react-router-dom";
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
 const Teachers = lazy(() => import("./pages/Teachers/Teachers.jsx"));
 const Favorites = lazy(() => import("./pages/Favorites/Favorites.jsx"));
+const Loader = lazy(() => import("./components/Loader/Loader.jsx"));
 
 function App() {
   return (
     <>
-      <Suspense fallback={<p>dasdasd</p>}>
+      <Suspense fallback={<Loader />}>
         <Layout />
         <main>
           <Routes>
