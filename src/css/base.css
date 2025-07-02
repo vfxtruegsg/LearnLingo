@@ -1,0 +1,97 @@
+/* variables */
+
+:root {
+  --white: #fff;
+  --dark: #121417;
+  --light-yellow: #fbe9ba;
+  --yellow: #f4c550;
+
+  --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* font */
+
+@import url("https://fonts.cdnfonts.com/css/roboto");
+
+/* @font-face {
+  font-display: swap;
+  font-family: "manrope";
+  src: url("./font/Manrope-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "manrope";
+  src: url("./font/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "manrope";
+  src: url("./font/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "manrope";
+  src: url("./font/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+} */
+
+/* some settings */
+
+html,
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+textarea:focus,
+select:focus,
+input:focus {
+  outline: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* body */
+
+body {
+  font-family: "Roboto Medium", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.4;
+
+  background-color: var(--white);
+  color: var(--dark);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* container */
+
+.container {
+  min-width: 320px;
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 128px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* base component style */
