@@ -28,6 +28,13 @@
   align-items: center;
   gap: 8px;
   padding: 14px 0;
+  transition: all var(--animation);
+}
+
+.logInBtn:hover,
+.logInBtn:focus {
+  scale: 1.1;
+  opacity: 0.9;
 }
 
 .registerBtn {
@@ -35,4 +42,12 @@
   padding: 14px 39px;
   color: var(--white);
   background: var(--dark);
+
+  transition: all var(--animation);
+}
+
+.registerBtn:hover,
+.registerBtn:focus {
+  scale: 1.02;
+  opacity: 0.9;
 }

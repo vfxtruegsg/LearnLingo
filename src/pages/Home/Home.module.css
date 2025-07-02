@@ -1,0 +1,87 @@
+.globalInfContainer {
+  padding: 98px 108px 98px 64px;
+  border-radius: 30px;
+  background: var(--light-gray);
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.globalInfContainer > *:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.globalInfContainer > *:nth-last-child(2) {
+  margin-bottom: 64px;
+}
+
+.header {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.16667;
+  letter-spacing: -0.02em;
+}
+
+.highlighted {
+  background-color: var(--light-yellow);
+  font-style: italic;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.getStartBtn {
+  border-radius: 12px;
+  padding: 16px 88px;
+  background: var(--yellow);
+
+  font-size: 18px;
+  line-height: 1.55556;
+
+  transition: all var(--animation);
+}
+
+.getStartBtn:hover,
+.getStartBtn:focus {
+  scale: 1.05;
+  opacity: 0.9;
+}
+
+.imageContainer {
+  position: relative;
+  width: 568px;
+  height: 530px;
+  border-radius: 30px;
+  background: var(--light-yellow);
+}
+
+.advantagesList {
+  padding: 40px 122.5px;
+  border: 1.5px dashed var(--yellow);
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.advantagesItems {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.quantity {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  max-width: 96px;
+  color: #121417b3;
+}
