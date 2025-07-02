@@ -1,0 +1,38 @@
+.layoutContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logInBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+.registerBtn {
+  border-radius: 12px;
+  padding: 14px 39px;
+  color: var(--white);
+  background: var(--dark);
+}

@@ -9,42 +9,6 @@
   --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* font */
-
-@import url("https://fonts.cdnfonts.com/css/roboto");
-
-/* @font-face {
-  font-display: swap;
-  font-family: "manrope";
-  src: url("./font/Manrope-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "manrope";
-  src: url("./font/Manrope-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "manrope";
-  src: url("./font/Manrope-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "manrope";
-  src: url("./font/Manrope-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-} */
-
 /* some settings */
 
 html,
@@ -67,7 +31,7 @@ button {
 
 body {
   font-family: "Roboto Medium", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   font-style: normal;
   line-height: 1.4;
@@ -89,9 +53,15 @@ body {
   min-width: 320px;
   max-width: 1440px;
   width: 100%;
-  padding: 0 128px;
+  padding: 0 64px;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 /* base component style */
+
+.btn {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+}

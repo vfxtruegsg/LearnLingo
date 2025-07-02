@@ -1,0 +1,9 @@
+.navContainer {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.isActive {
+  color: var(--yellow);
+}
