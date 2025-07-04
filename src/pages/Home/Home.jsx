@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import css from "./Home.module.css";
+import { meta } from "@eslint/js";
 
 const Home = () => {
+  const girlImg = new URL("../../images/girlImage.png", import.meta.url);
+  const macBookImg = new URL("../../images/MacBook.png", import.meta.url);
+
   return (
     <section className={css.homePageContainer}>
       <div className="container">
@@ -31,14 +35,14 @@ const Home = () => {
           <div className={css.imageContainer}>
             <img
               style={{ position: "absolute", top: 80, left: 114 }}
-              src="./src/images/girlImage.png"
+              src={girlImg}
               alt="Girl image"
               width={339}
               height={339}
             />
             <img
               style={{ position: "absolute", left: 104, bottom: 0 }}
-              src="./src/images/MacBook.png"
+              src={macBookImg}
               alt="MacBook image"
               width={361}
               height={176}
