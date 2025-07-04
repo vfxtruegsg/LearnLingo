@@ -3,6 +3,10 @@
   align-items: flex-start;
   gap: 48px;
   padding: 24px;
+  width: 1184px;
+
+  background-color: var(--white);
+  border-radius: 24px;
 }
 
 .teacherImageContainer {
@@ -32,26 +36,22 @@
 
 .firstInformation {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 32px;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .languagesInfo {
   display: flex;
   gap: 12px;
   align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
   margin-right: 64px;
 }
 
 .languagesInfo li {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   position: relative;
-  font-size: 14px;
 }
 
 .languagesInfo li:not(:first-child)::before {
@@ -63,10 +63,24 @@
   margin: 0 8px;
 }
 
+.teacherName {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.globInfType {
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--gray);
+}
+
 .levelLangContainer {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 32px;
 }
 
 .levelLangContainer > *:not(:first-child) {
@@ -77,11 +91,67 @@
   background: var(--yellow);
 }
 
-.levelLangBtn {
+.readMoreBtn {
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+
+  margin-bottom: 32px;
+}
+
+.levelLang {
   border-radius: 35px;
   padding: 8px 12px;
 
   font-weight: 500;
   font-size: 14px;
   line-height: 1.15;
+}
+
+/* reviews */
+
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.reviewerInformation {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ratingBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviewerImage {
+  border-radius: 100px;
+  width: 44px;
+  height: 44px;
+}
+
+/* book trial */
+
+.bookTrialBtn {
+  border-radius: 12px;
+  padding: 16px 48px;
+  background: var(--yellow);
+
+  font-weight: 700;
+  font-size: 18px;
+
+  transition: all var(--animation);
+}
+
+.bookTrialBtn:hover,
+.bookTrialBtn:focus {
+  scale: 1.02;
+  opacity: 0.9;
 }

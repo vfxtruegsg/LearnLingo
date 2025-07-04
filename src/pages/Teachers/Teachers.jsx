@@ -35,9 +35,11 @@ const Teachers = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <section>
+    <section
+      style={{ backgroundColor: "#f8f8f8", paddingTop: 32, paddingBottom: 32 }}
+    >
       <div className="container">
-        <ul>
+        <ul className={css.teacherList}>
           {teachersData.map((item, index) => (
             <TeacherCard key={index} data={item} />
           ))}
