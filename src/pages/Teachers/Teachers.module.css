@@ -5,3 +5,20 @@
   align-items: center;
   gap: 32px;
 }
+
+.loadMoreButton {
+  border-radius: 12px;
+  padding: 16px 48px;
+  background-color: var(--yellow);
+
+  font-weight: 700;
+  font-size: 18px;
+
+  transition: all var(--animation);
+}
+
+.loadMoreButton:hover,
+.loadMoreButton:focus {
+  scale: 1.02;
+  opacity: 0.9;
+}

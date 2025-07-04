@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 import TeacherCard from "../../components/TeacherCard/TeacherCard.jsx";
 
 const Teachers = () => {
-  const [teachersData, setTeachersData] = useState(null);
-
+  const [allTeachers, setAllTeachers] = useState([]); // Все учителя
+  const [visibleTeachers, setVisibleTeachers] = useState([]); // Видимые
+  const [visibleCount, setVisibleCount] = useState(4);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -18,10 +19,17 @@ const Teachers = () => {
           "https://learnlingo-7165b-default-rtdb.firebaseio.com/.json"
         );
 
-        setTeachersData(response.data);
+        const data = response.data;
+
+        if (Array.isArray(data)) {
+          setAllTeachers(data);
+          setVisibleTeachers(data.slice(0, 4));
+        } else {
+          toast.error("Данные с сервера некорректны.");
+        }
       } catch (err) {
         console.error(err.message);
-        toast.error("Something went wrong! Please try again later.");
+        toast.error("Ошибка при загрузке учителей.");
       } finally {
         setIsLoading(false);
       }
@@ -30,20 +38,30 @@ const Teachers = () => {
     fetchTeachers();
   }, []);
 
-  console.log(teachersData);
+  const handleLoadMore = () => {
+    const nextCount = visibleCount + 4;
+    setVisibleTeachers(allTeachers.slice(0, nextCount));
+    setVisibleCount(nextCount);
+  };
 
   return isLoading ? (
     <Loader />
   ) : (
-    <section
-      style={{ backgroundColor: "#f8f8f8", paddingTop: 32, paddingBottom: 32 }}
-    >
+    <section style={{ backgroundColor: "#f8f8f8", padding: "32px 0" }}>
       <div className="container">
         <ul className={css.teacherList}>
-          {teachersData.map((item, index) => (
-            <TeacherCard key={index} data={item} />
+          {visibleTeachers.map((teacher, index) => (
+            <TeacherCard key={index} data={teacher} />
           ))}
         </ul>
+
+        {visibleCount < allTeachers.length && (
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            <button onClick={handleLoadMore} className={css.loadMoreButton}>
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
