@@ -1,0 +1,159 @@
+.modal {
+  background: #fff;
+  padding: 64px;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 16px;
+  position: relative;
+
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.teacherInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.yourTeacher {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: var(--gray);
+}
+
+.teacherInfo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 100px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.33333;
+  margin-bottom: 20px;
+}
+
+.teacherName {
+  font-weight: 500;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  padding-left: 28px;
+  user-select: none;
+}
+
+.radioInput {
+  appearance: none;
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.radioInput:checked {
+  border-color: #f4bc4c;
+  background-color: white;
+}
+
+.radioInput:checked::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #f4bc4c;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.bookBtn {
+  margin-top: 40px;
+  padding: 16px 215px;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+
+  transition: all var(--animation);
+}
+
+.bookBtn:hover,
+.bookBtn:focus {
+  scale: 1.02;
+  opacity: 0.9;
+}
+
+.noScroll {
+  overflow: hidden;
+  height: 100%;
+}

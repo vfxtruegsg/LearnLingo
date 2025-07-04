@@ -1,5 +1,6 @@
-import { useState } from "react";
 import css from "./TeacherCard.module.css";
+import BookingModal from "../BookingModal/BookingModal.jsx";
+import { useState } from "react";
 
 const TeacherCard = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -7,6 +8,8 @@ const TeacherCard = ({ data }) => {
   const readMoreClick = () => {
     setShowDetails(true);
   };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   return (
     <li className={css.teacherListItem}>
@@ -133,8 +136,16 @@ const TeacherCard = ({ data }) => {
         </div>
 
         {showDetails && (
-          <button className={css.bookTrialBtn}>Book trial lesson</button>
+          <button onClick={() => setIsOpen(true)} className={css.bookTrialBtn}>
+            Book trial lesson
+          </button>
         )}
+
+        <BookingModal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setIsOpen(false)}
+          teacher={data}
+        />
       </div>
     </li>
   );

@@ -155,3 +155,34 @@
   scale: 1.02;
   opacity: 0.9;
 }
+
+/* Modal */
+
+.modalContainer {
+  padding: 64px;
+}
+
+.modaltitle {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.modalDescription {
+  line-height: 1.375;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+.modalTeacherContainer {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+}
+
+.yourTeacher {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: var(--gray);
+}
