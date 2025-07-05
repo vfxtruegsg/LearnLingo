@@ -152,8 +152,3 @@
   scale: 1.02;
   opacity: 0.9;
 }
-
-.noScroll {
-  overflow: hidden;
-  height: 100%;
-}

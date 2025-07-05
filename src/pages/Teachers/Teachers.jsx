@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import TeacherCard from "../../components/TeacherCard/TeacherCard.jsx";
 
 const Teachers = () => {
-  const [allTeachers, setAllTeachers] = useState([]); // Все учителя
-  const [visibleTeachers, setVisibleTeachers] = useState([]); // Видимые
+  const [allTeachers, setAllTeachers] = useState([]);
+  const [visibleTeachers, setVisibleTeachers] = useState([]);
   const [visibleCount, setVisibleCount] = useState(4);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,7 @@ const Teachers = () => {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          "https://learnlingo-7165b-default-rtdb.firebaseio.com/.json"
+          "https://learnlingo-7165b-default-rtdb.firebaseio.com/teachers.json"
         );
 
         const data = response.data;
@@ -25,11 +25,11 @@ const Teachers = () => {
           setAllTeachers(data);
           setVisibleTeachers(data.slice(0, 4));
         } else {
-          toast.error("Данные с сервера некорректны.");
+          toast.error("You currently have no teachers selected!");
         }
       } catch (err) {
         console.error(err.message);
-        toast.error("Ошибка при загрузке учителей.");
+        toast.error("Something went wrong...");
       } finally {
         setIsLoading(false);
       }

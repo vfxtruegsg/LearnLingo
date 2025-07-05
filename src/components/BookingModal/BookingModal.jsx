@@ -6,8 +6,6 @@ import css from "./BookingModal.module.css";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
-Modal.setAppElement("#root");
-
 const schema = yup.object().shape({
   fullName: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -46,13 +44,13 @@ const BookingModal = ({ isOpen, onRequestClose, teacher }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.documentElement.classList.add(css.noScroll);
+      document.documentElement.classList.add("noScroll");
     } else {
-      document.documentElement.classList.remove(css.noScroll);
+      document.documentElement.classList.remove("noScroll");
     }
 
     return () => {
-      document.documentElement.classList.remove(css.noScroll);
+      document.documentElement.classList.remove("noScroll");
     };
   }, [isOpen]);
 

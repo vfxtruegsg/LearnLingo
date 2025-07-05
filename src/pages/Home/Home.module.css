@@ -1,3 +1,7 @@
+.homePageContainer {
+  padding-bottom: 32px;
+}
+
 .globalInfContainer {
   padding: 98px 108px 98px 64px;
   border-radius: 30px;
@@ -44,7 +48,7 @@
 .getStartBtn:hover,
 .getStartBtn:focus {
   scale: 1.05;
-  opacity: 0.9;
+  background: var(--smooth-yellow);
 }
 
 .imageContainer {

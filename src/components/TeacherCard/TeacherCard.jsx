@@ -1,15 +1,83 @@
 import css from "./TeacherCard.module.css";
 import BookingModal from "../BookingModal/BookingModal.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { auth } from "../../firebase/firebase.js";
+import toast from "react-hot-toast";
+import { getDatabase, ref, set, remove, get } from "firebase/database";
 
 const TeacherCard = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
-
-  const readMoreClick = () => {
-    setShowDetails(true);
-  };
-
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const teacherKey = data.id
+    ? data.id
+    : `${data.name}_${data.surname}`.toLowerCase().replace(/\s/g, "_");
+
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      try {
+        const db = getDatabase();
+        const snapshot = await get(
+          ref(db, `favorites/${user.uid}/${teacherKey}`)
+        );
+        if (snapshot.exists()) {
+          setIsFavorite(true);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    checkFavoriteStatus();
+  }, [teacherKey]);
+
+  const handleToggleFavorite = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      toast.error("Please log in to your account!");
+      return;
+    }
+
+    const db = getDatabase();
+    const favoriteRef = ref(db, `favorites/${user.uid}/${teacherKey}`);
+
+    try {
+      if (isFavorite) {
+        await remove(favoriteRef);
+        setIsFavorite(false);
+        toast.success("Removed from favorites");
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
+      } else {
+        const teacherToSave = {
+          id: teacherKey,
+          name: data.name,
+          surname: data.surname,
+          avatar_url: data.avatar_url,
+          rating: data.rating,
+          price_per_hour: data.price_per_hour,
+          languages: data.languages,
+          conditions: data.conditions,
+          reviews: data.reviews,
+          levels: data.levels,
+        };
+
+        await set(favoriteRef, teacherToSave);
+        setIsFavorite(true);
+        toast.success("Added to favorites");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <li className={css.teacherListItem}>
@@ -27,6 +95,7 @@ const TeacherCard = ({ data }) => {
           height={12}
         />
       </div>
+
       <div>
         <div className={css.firstInformation}>
           <p style={{ fontWeight: 500, color: "#8a8a89", marginRight: 192 }}>
@@ -35,42 +104,38 @@ const TeacherCard = ({ data }) => {
 
           <ul className={css.languagesInfo}>
             <li>
-              <img
-                src="/bookOpen.svg"
-                alt="Book image"
-                width={16}
-                height={16}
-              />
-              <p style={{ fontWeight: 500, lineHeight: 1 / 0.5 }}>
-                Lessons online
-              </p>
+              <img src="/bookOpen.svg" alt="Book" width={16} height={16} />
+              <p>Lessons online</p>
             </li>
             <li>
-              <p style={{ fontWeight: 500, lineHeight: 1.5 }}>
-                Lessons done: {data.lessons_done}
-              </p>
+              <p>Lessons done: {data.lessons_done}</p>
             </li>
             <li>
-              <img src="/star.svg" alt="Star image" width={16} height={16} />
-              <p style={{ fontWeight: 500, lineHeight: 1.5 }}>
-                Rating: {data.rating}
-              </p>
+              <img src="/star.svg" alt="Star" width={16} height={16} />
+              <p>Rating: {data.rating}</p>
             </li>
             <li>
-              <p style={{ fontWeight: 500, lineHeight: 1.5 }}>
+              <p>
                 Price / 1 hour:{" "}
                 <span style={{ color: "#38cd3e" }}>{data.price_per_hour}$</span>
               </p>
             </li>
           </ul>
 
-          <button>
-            <img src="/heart.svg" alt="Heart image" width={26} height={26} />
+          <button onClick={handleToggleFavorite}>
+            <img
+              src={isFavorite ? "/likeHeart.svg" : "/heart.svg"}
+              alt="Favorite"
+              width={26}
+              height={26}
+            />
           </button>
         </div>
+
         <h2 className={css.teacherName}>
           {data.name} {data.surname}
         </h2>
+
         <div style={{ marginBottom: 16 }}>
           <p>
             <span className={css.globInfType}>Speaks:</span>{" "}
@@ -89,56 +154,60 @@ const TeacherCard = ({ data }) => {
         </div>
 
         {!showDetails && (
-          <button onClick={readMoreClick} className={css.readMoreBtn}>
+          <button
+            onClick={() => setShowDetails(true)}
+            className={css.readMoreBtn}
+          >
             Read more
           </button>
         )}
 
         {showDetails && (
-          <p style={{ maxWidth: 968, marginBottom: 32 }}>{data.experience}</p>
-        )}
+          <>
+            <p style={{ maxWidth: 968, marginBottom: 32 }}>{data.experience}</p>
 
-        {showDetails && (
-          <ul>
-            {data.reviews.map((item, index) => (
-              <li key={index} className={css.reviewItem}>
-                <div className={css.reviewerInformation}>
-                  <img
-                    className={css.reviewerImage}
-                    src={data.avatar_url}
-                    alt="Teacher avatar"
-                  />
-                  <div>
-                    <p style={{ color: "#8a8a89" }}>{item.reviewer_name}</p>
-                    <div className={css.ratingBlock}>
-                      <img
-                        src="/star.svg"
-                        alt="Star image"
-                        width={16}
-                        height={16}
-                      />
-                      <p>{item.reviewer_rating}.0</p>
+            <ul>
+              {data.reviews.map((item, index) => (
+                <li key={index} className={css.reviewItem}>
+                  <div className={css.reviewerInformation}>
+                    <img
+                      className={css.reviewerImage}
+                      src={data.avatar_url}
+                      alt="Reviewer avatar"
+                    />
+                    <div>
+                      <p style={{ color: "#8a8a89" }}>{item.reviewer_name}</p>
+                      <div className={css.ratingBlock}>
+                        <img
+                          src="/star.svg"
+                          alt="Star"
+                          width={16}
+                          height={16}
+                        />
+                        <p>{item.reviewer_rating}.0</p>
+                      </div>
                     </div>
                   </div>
+                  <p style={{ fontWeight: "500" }}>{item.comment}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className={css.levelLangContainer}>
+              {data.levels.map((item, index) => (
+                <div key={index} className={css.levelLang}>
+                  #{item}
                 </div>
-                <p style={{ fontWeight: "500" }}>{item.comment}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className={css.levelLangContainer}>
-          {data.levels.map((item, index) => (
-            <div key={index} className={css.levelLang}>
-              #{item}
+              ))}
             </div>
-          ))}
-        </div>
 
-        {showDetails && (
-          <button onClick={() => setIsOpen(true)} className={css.bookTrialBtn}>
-            Book trial lesson
-          </button>
+            <button
+              onClick={() => setIsOpen(true)}
+              className={css.bookTrialBtn}
+            >
+              Book trial lesson
+            </button>
+          </>
         )}
 
         <BookingModal

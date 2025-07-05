@@ -5,6 +5,7 @@
   --dark: #121417;
   --light-yellow: #fbe9ba;
   --yellow: #f4c550;
+  --smooth-yellow: #ffdc86;
   --light-gray: #f8f8f8;
   --gray: #8a8a89;
   --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,4 +66,9 @@ body {
   font-weight: 700;
   font-size: 16px;
   line-height: 1.25;
+}
+
+.noScroll {
+  overflow: hidden;
+  height: 100%;
 }

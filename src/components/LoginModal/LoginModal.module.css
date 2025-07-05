@@ -1,0 +1,92 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  position: relative;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: var(--white);
+  padding: 64px;
+  border-radius: 20px;
+  width: 565px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.description {
+  color: rgba(18, 20, 23, 0.8);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+.button {
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  text-align: center;
+  background: var(--yellow);
+  font-weight: 700;
+  line-height: 1.6;
+  font-size: 18px;
+  transition: all var(--animation);
+}
+
+.button:hover,
+.button:focus {
+  scale: 1.05;
+  background: var(--smooth-yellow);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
