@@ -1,9 +1,9 @@
-import axios from "axios";
 import css from "./Teachers.module.css";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader.jsx";
 import toast from "react-hot-toast";
 import TeacherCard from "../../components/TeacherCard/TeacherCard.jsx";
+import { getDatabase, ref, get } from "firebase/database";
 
 const Teachers = () => {
   const [allTeachers, setAllTeachers] = useState([]);
@@ -15,20 +15,23 @@ const Teachers = () => {
     const fetchTeachers = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "https://learnlingo-7165b-default-rtdb.firebaseio.com/teachers.json"
-        );
 
-        const data = response.data;
+        const db = getDatabase();
+        const teachersRef = ref(db, "teachers");
+        const snapshot = await get(teachersRef);
 
-        if (Array.isArray(data)) {
-          setAllTeachers(data);
-          setVisibleTeachers(data.slice(0, 4));
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+
+          const array = Array.isArray(data) ? data : Object.values(data);
+
+          setAllTeachers(array);
+          setVisibleTeachers(array.slice(0, 4));
         } else {
-          toast.error("You currently have no teachers selected!");
+          toast.error("You currently have no teachers saved.");
         }
-      } catch (err) {
-        console.error(err.message);
+      } catch (error) {
+        console.error("Error loading teachers:", error);
         toast.error("Something went wrong...");
       } finally {
         setIsLoading(false);

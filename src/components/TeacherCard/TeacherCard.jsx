@@ -51,10 +51,6 @@ const TeacherCard = ({ data }) => {
         await remove(favoriteRef);
         setIsFavorite(false);
         toast.success("Removed from favorites");
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 300);
       } else {
         const teacherToSave = {
           id: teacherKey,
