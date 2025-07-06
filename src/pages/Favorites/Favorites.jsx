@@ -5,6 +5,7 @@ import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import Loader from "../../components/Loader/Loader";
 import toast from "react-hot-toast";
 import { onAuthStateChanged } from "firebase/auth";
+import css from "./Favorites.module.css";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -55,7 +56,7 @@ const Favorites = () => {
             You have no favorite teachers yet.
           </p>
         ) : (
-          <ul className="teacherList">
+          <ul className={css.teacherList}>
             {favorites.map((teacher) => (
               <TeacherCard
                 key={teacher.id}
