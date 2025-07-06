@@ -77,6 +77,17 @@ const TeacherCard = ({ data, onRemove }) => {
     }
   };
 
+  const bookTrialModal = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      toast.error("Please log in to your account!");
+      return;
+    }
+
+    setIsOpen(true);
+  };
+
   return (
     <li className={css.teacherListItem}>
       <div className={css.teacherImageContainer}>
@@ -199,10 +210,7 @@ const TeacherCard = ({ data, onRemove }) => {
               ))}
             </div>
 
-            <button
-              onClick={() => setIsOpen(true)}
-              className={css.bookTrialBtn}
-            >
+            <button onClick={bookTrialModal} className={css.bookTrialBtn}>
               Book trial lesson
             </button>
           </>
