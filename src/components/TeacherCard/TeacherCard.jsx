@@ -5,7 +5,7 @@ import { auth } from "../../firebase/firebase.js";
 import toast from "react-hot-toast";
 import { getDatabase, ref, set, remove, get } from "firebase/database";
 
-const TeacherCard = ({ data }) => {
+const TeacherCard = ({ data, onRemove }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -51,6 +51,8 @@ const TeacherCard = ({ data }) => {
         await remove(favoriteRef);
         setIsFavorite(false);
         toast.success("Removed from favorites");
+
+        if (onRemove) onRemove(teacherKey);
       } else {
         const teacherToSave = {
           id: teacherKey,

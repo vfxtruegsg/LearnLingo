@@ -4,15 +4,20 @@ import { auth } from "../../firebase/firebase";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import Loader from "../../components/Loader/Loader";
 import toast from "react-hot-toast";
-import css from "./Favorites.module.css";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      const user = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        toast.error("Please log in to view your favorites.");
+        setFavorites([]);
+        setIsLoading(false);
+        return;
+      }
 
       try {
         const db = getDatabase();
@@ -27,30 +32,36 @@ const Favorites = () => {
         }
       } catch (error) {
         console.error("Error fetching favorites:", error);
-        toast.error("Failed to load favorites");
+        toast.error("Failed to load favorites.");
       } finally {
         setIsLoading(false);
       }
-    };
+    });
 
-    fetchFavorites();
+    return () => unsubscribe();
   }, []);
 
-  console.log(favorites);
+  const handleRemoveFavorite = (teacherId) => {
+    setFavorites((prev) => prev.filter((t) => t.id !== teacherId));
+  };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <section style={{ padding: "32px 0", backgroundColor: "#f8f8f8" }}>
       <div className="container">
-        {isLoading ? (
-          <Loader />
-        ) : favorites.length === 0 ? (
+        {favorites.length === 0 ? (
           <p style={{ textAlign: "center", fontSize: 18 }}>
-            You have no favorites yet.
+            You have no favorite teachers yet.
           </p>
         ) : (
-          <ul className={css.teacherList}>
-            {favorites.map((teacher, index) => (
-              <TeacherCard key={index} data={teacher} />
+          <ul className="teacherList">
+            {favorites.map((teacher) => (
+              <TeacherCard
+                key={teacher.id}
+                data={teacher}
+                onRemove={handleRemoveFavorite}
+              />
             ))}
           </ul>
         )}
